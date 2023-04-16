@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.kanye.deployment.name }}
+spec:
+  replicas: {{ .Values.kanye.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.kanye.component }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.kanye.component }}
+    spec:
+      containers:
+        - name: kanye-service
+          image: "grzesiekoladele/kanye-quotes:{{ .Values.kanye.docker.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.kanye.docker.container.port }}

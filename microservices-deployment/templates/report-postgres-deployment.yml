@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: report-postgres-deployment
+  name: {{ .Values.report.database.deployment.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.report.database.replicas }}
   selector:
     matchLabels:
-      component: report-database
+      component: {{ .Values.report.database.component }}
   template:
     metadata:
       labels:
-        component: report-database
+        component: {{ .Values.report.database.component }}
     spec:
       volumes:
         - name: report-storage
           persistentVolumeClaim:
-            claimName: report-persistent-volume-claim
+            claimName: {{ .Values.report.database.persistentVolumeClaim.name }}
       containers:
         - name: report-database
-          image: postgres:14.1
+          image: "{{ .Values.report.database.docker.image.name }}:{{ .Values.report.database.docker.image.tag }}"
           ports:
-            - containerPort: 5432
+            - containerPort: {{ .Values.report.database.docker.container.port }}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: report-storage
@@ -33,4 +33,4 @@ spec:
             - name: POSTGRES_DB
               value: reports-db
             - name: POSTGRES_PORT
-              value: "5432"
+              value: "{{ .Values.report.database.docker.container.port }}"

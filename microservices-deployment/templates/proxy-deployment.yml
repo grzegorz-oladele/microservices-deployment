@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.proxy.deployment.name }}
+spec:
+  replicas: {{ .Values.proxy.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.proxy.component }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.proxy.component }}
+    spec:
+      containers:
+        - name: proxy
+          image: "grzesiekoladele/proxy:{{ .Values.proxy.docker.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.proxy.docker.container.port }}
+          env:
+            - name: REST-TEMPLATE_KANYE_HOST
+              value: {{ .Values.kanye.service.clusterIp.name }}
+            - name: REST-TEMPLATE_RICK-AND-MORTY_HOST
+              value: {{ .Values.rickAndMorty.service.clusterIp.name }}
+            - name: REST-TEMPLATE_REPORT_HOST
+              value: {{ .Values.report.service.clusterIp.name }}

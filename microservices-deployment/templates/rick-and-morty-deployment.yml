@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.rickAndMorty.deployment.name }}
+spec:
+  replicas: {{ .Values.rickAndMorty.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.rickAndMorty.component }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.rickAndMorty.component }}
+    spec:
+      containers:
+        - name: rick-and-morty-service
+          image: "grzesiekoladele/rick-and-morty:{{ .Values.rickAndMorty.docker.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.rickAndMorty.docker.container.port }}
+          env:
+            - name: REST-TEMPLATE_PROXY_HOST
+              value: {{ .Values.proxy.host }}

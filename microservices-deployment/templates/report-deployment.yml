@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.report.deployment.name }}
+spec:
+  replicas: {{ .Values.report.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.report.component }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.report.component }}
+    spec:
+      containers:
+        - name: report-service
+          image: "grzesiekoladele/report-service:{{ .Values.report.docker.image.tage }}"
+          ports:
+            - containerPort: {{ .Values.report.docker.container.port }}
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://{{ .Values.report.database.service.clusterIp.name }}:{{ .Values.report.database.docker.container.port }}/reports-db"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: postgres
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: create-drop
+            - name: REST-TEMPLATE_PROXY_HOST
+              value: {{ .Values.proxy.host }}

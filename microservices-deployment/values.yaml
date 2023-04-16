@@ -1,0 +1,76 @@
+proxy:
+  host: localhost
+  component: proxy
+  deployment:
+    name: proxy-deployment
+  service:
+    clusterIp:
+      name: proxy-cluster-ip-service
+    loadBalancer:
+      name: proxy-load-balancer-service
+  docker:
+    image:
+      tag: v1
+    container:
+      port: 8100
+  replicas: 1
+
+kanye:
+  component: kanye-quotes
+  deployment:
+    name: kanye-deployment
+  service:
+    clusterIp:
+      name: kanye-cluster-ip-service
+  docker:
+    image:
+      tag: v1
+    container:
+      port: 9000
+  replicas: 1
+
+report:
+  component: report
+  deployment:
+    name: report-deployment
+  service:
+    clusterIp:
+      name: report-cluster-ip-service
+  docker:
+    image:
+      tage: v1
+    container:
+      port: 8200
+  replicas: 1
+  database:
+    component: report-database
+    deployment:
+      name: report-postgres-deployment
+    service:
+      clusterIp:
+        name: report-postgres-cluster-ip-service
+    docker:
+      container:
+        port: 5432
+      image:
+        name: postgres
+        tag: 14.1
+    replicas: 1
+    persistentVolumeClaim:
+      name: report-persistent-volume-claim
+      volume:
+        storage: 1Gi
+
+rickAndMorty:
+  component: rick-and-morty
+  deployment:
+    name: rick-and-morty-deployment
+  service:
+    clusterIp:
+      name: rick-and-morty-cluster-ip-service
+  docker:
+    image:
+      tag: v1
+    container:
+      port: 8000
+  replicas: 1
