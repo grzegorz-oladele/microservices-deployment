@@ -1,0 +1,32 @@
+proxy:
+  docker:
+    image:
+      tag: v1
+  replicas: 6
+
+kanye:
+  docker:
+    image:
+      tag: v1
+  replicas: 6
+
+report:
+  docker:
+    image:
+      tage: v1
+  replicas: 6
+  database:
+    docker:
+      image:
+        name: postgres
+        tag: 14.1
+    replicas: 1
+    persistentVolumeClaim:
+      volume:
+        storage: 8Mi
+
+rickAndMorty:
+  docker:
+    image:
+      tag: v1
+  replicas: 6
