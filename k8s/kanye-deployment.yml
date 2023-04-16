@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kanye-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: kanye-quotes
+  template:
+    metadata:
+      labels:
+        component: kanye-quotes
+    spec:
+      containers:
+        - name: kanye-service
+          image: grzesiekoladele/kanye-quotes:v1
+          ports:
+            - containerPort: 9000

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: proxy
+  template:
+    metadata:
+      labels:
+        component: proxy
+    spec:
+      containers:
+        - name: proxy
+          image: grzesiekoladele/proxy:v1
+          ports:
+            - containerPort: 8100
+          env:
+            - name: REST-TEMPLATE_KANYE_HOST
+              value: kanye-cluster-ip-service
+            - name: REST-TEMPLATE_RICK-AND-MORTY_HOST
+              value: rick-and-morty-cluster-ip-service
+            - name: REST-TEMPLATE_REPORT_HOST
+              value: report-cluster-ip-service

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: report-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: report
+  template:
+    metadata:
+      labels:
+        component: report
+    spec:
+      containers:
+        - name: report-service
+          image: grzesiekoladele/report-service:v1
+          ports:
+            - containerPort: 8200
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://report-postgres-cluster-ip-service:5432/reports-db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: postgres
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: create-drop
+            - name: REST-TEMPLATE_PROXY_HOST
+              value: localhost

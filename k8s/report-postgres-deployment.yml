@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: report-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: report-database
+  template:
+    metadata:
+      labels:
+        component: report-database
+    spec:
+      volumes:
+        - name: report-storage
+          persistentVolumeClaim:
+            claimName: report-persistent-volume-claim
+      containers:
+        - name: report-database
+          image: postgres:14.1
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: report-storage
+              subPath: report-database
+          env:
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_DB
+              value: reports-db
+            - name: POSTGRES_PORT
+              value: "5432"
