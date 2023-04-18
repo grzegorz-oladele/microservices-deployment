@@ -1,1 +1,4 @@
 microservices-deployment.iml
+.idea
+.idea/sonarlint/securityhotspotstore/index.pb
+.idea/sonarlint/issuestore/index.pb
