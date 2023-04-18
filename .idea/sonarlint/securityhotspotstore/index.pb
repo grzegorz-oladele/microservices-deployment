@@ -23,3 +23,10 @@ x
 Hmicroservices-deployment/templates/rick-and-morty-cluster-ip-service.yml,e/b/ebd6ca3184edbee140498ef60dab3169b3a59420
 p
 @microservices-deployment/templates/rick-and-morty-deployment.yml,c/9/c97a4f8df3657fba33552295c6699fac7b58b023
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+\
+,.idea/inspectionProfiles/Project_Default.xml,4/9/496a238a6afa168dbaf6efd37bb459331589579c
