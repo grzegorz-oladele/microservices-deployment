@@ -10,10 +10,10 @@ proxy:
       name: proxy-load-balancer-service
   docker:
     image:
-      tag: v1
+      tag: v2
     container:
       port: 8100
-  replicas: 1
+  replicas: 5
 
 kanye:
   component: kanye-quotes
@@ -27,7 +27,7 @@ kanye:
       tag: v1
     container:
       port: 9000
-  replicas: 1
+  replicas: 5
 
 report:
   component: report
@@ -38,10 +38,10 @@ report:
       name: report-cluster-ip-service
   docker:
     image:
-      tage: v1
+      tage: v2
     container:
       port: 8200
-  replicas: 1
+  replicas: 5
   database:
     component: report-database
     deployment:
@@ -70,7 +70,7 @@ rickAndMorty:
       name: rick-and-morty-cluster-ip-service
   docker:
     image:
-      tag: v1
+      tag: v2
     container:
       port: 8000
-  replicas: 1
+  replicas: 5

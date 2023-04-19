@@ -1,7 +1,7 @@
 proxy:
   docker:
     image:
-      tag: v1
+      tag: v2
   replicas: 3
 
 kanye:
@@ -13,7 +13,7 @@ kanye:
 report:
   docker:
     image:
-      tage: v1
+      tage: v2
   replicas: 3
   database:
     docker:
@@ -28,5 +28,5 @@ report:
 rickAndMorty:
   docker:
     image:
-      tag: v1
+      tag: v2
   replicas: 3
