@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: proxy-deployment
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       component: proxy
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: proxy
-          image: grzesiekoladele/proxy:v1
+          image: grzesiekoladele/proxy:v2
           ports:
             - containerPort: 8100
           env:
